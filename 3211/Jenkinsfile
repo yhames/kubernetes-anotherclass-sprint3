@@ -7,16 +7,14 @@ pipeline {
     }
 
     environment {
-        // 본인의 username으로 하실 분은 수정해주세요.
+        // 본인의 DockerHub username로 수정 해주세요.
         DOCKERHUB_USERNAME = '1pro'
-
-        // 배포용 Github - Sprint3의 배포를 Fork 하신 분
+        // 배포용 Github - Sprint3를 Fork 후 Username 변경 해주세요.
         RELEASE_GITHUB_URL = 'https://github.com/k8s-1pro/kubernetes-anotherclass-sprint3.git'
-
-        // App용 Github - Api-Tester App 소스코드를 Fork 하신 분
+        // App용 Github - Api-Tester App 소스코드를 Fork 후 Username 변경 해주세요.
         APP_GITHUB_URL = 'https://github.com/k8s-1pro/kubernetes-anotherclass-api-tester.git'
-        APP_VERSION = '3.0.0'
 
+        APP_VERSION = '3.0.0'
         // 실습 넘버링
         CLASS_NUM = '3211'
     }
@@ -24,7 +22,6 @@ pipeline {
     stages {
         stage('소스파일 체크아웃') {
             steps {
-                // 본인의 username으로 하실 분은 수정해주세요.
                 git branch: "${APP_VERSION}", url: "${APP_GITHUB_URL}"
             }
         }
@@ -60,11 +57,7 @@ pipeline {
             steps {
                 // DockerHub로 이미지 업로드
                 script{
-                    if (DOCKERHUB_USERNAME == "1pro") {
-                        echo "docker push ${DOCKERHUB_USERNAME}/api-tester:${APP_VERSION}"
-                    } else {
-                        sh "docker push ${DOCKERHUB_USERNAME}/api-tester:${APP_VERSION}"
-                    }
+                    sh "docker push ${DOCKERHUB_USERNAME}/api-tester:${APP_VERSION}"
                 }
             }
         }
