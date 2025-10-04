@@ -32,7 +32,7 @@ spec:
       containers:
         - name: database
           # 1pro는 본인의 dockerhub username으로 변경해 주세요.
-          image: yhames/api-tester:3.0.0
+          image: wjddn494/api-tester:3.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
